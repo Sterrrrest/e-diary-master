@@ -12,7 +12,6 @@ from environs import Env
 env = Env()
 env.read_env()
 
-ivan = Schoolkid.objects.filter(full_name__contains="Фролов Иван Григорьевич")[0]
 
 def fix_marks(schoolkid):
     ivan_marks = Mark.objects.filter(schoolkid=ivan)
