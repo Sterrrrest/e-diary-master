@@ -25,10 +25,10 @@ def delete_chastisement(schoolkid):
 
 def create_commendation(schoolkid, subject):
     schoolkid = get_object_or_404(Schoolkid, full_name__contains=schoolkid)
-    texts = ["Brilliant", "Super", "Genius"]
+    commendations = ["Brilliant", "Super", "Genius"]
     subject = Subject.objects.filter(title=subject, year_of_study='6')[0]
     teacher = Lesson.objects.filter(subject=subject)[0].teacher
     lesson_date = Lesson.objects.filter(subject=subject).order_by('-date')[0].date
-    random_text = random.choice(texts)
+    random_commendation = random.choice(commendations)
 
-    Commendation.objects.create(text=random_text, created=lesson_date, schoolkid=schoolkid, subject=subject, teacher=teacher)
+    Commendation.objects.create(text=random_commendation, created=lesson_date, schoolkid=schoolkid, subject=subject, teacher=teacher)
