@@ -15,10 +15,8 @@ env.read_env()
 
 def fix_marks(schoolkid):
     schoolkid_marks = Mark.objects.filter(schoolkid=schoolkid)
-    bad_marks = schoolkid_marks.filter(points__lt=4)
-    for bad_mark in bad_marks:
-        bad_mark.points = "5"
-        bad_mark.save()
+    schoolkid_marks.filter(points__lt=4).update(points="5")
+
 
 def delete_chastisement(schoolkid):
     chast_schoolkid=Chastisement.objects.filter(schoolkid=schoolkid)
