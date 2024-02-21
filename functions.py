@@ -10,6 +10,9 @@ from django.shortcuts import get_object_or_404
 import os
 
 from environs import Env
+
+COMMENDATIONS = ["Brilliant", "Super", "Genius"]
+
 env = Env()
 env.read_env()
 
@@ -25,10 +28,9 @@ def delete_chastisement(schoolkid):
 
 def create_commendation(schoolkid, subject):
     schoolkid = get_object_or_404(Schoolkid, full_name__contains=schoolkid)
-    commendations = ["Brilliant", "Super", "Genius"]
     subject = Subject.objects.filter(title=subject, year_of_study='6')[0]
     teacher = Lesson.objects.filter(subject=subject)[0].teacher
     lesson_date = Lesson.objects.filter(subject=subject).order_by('-date')[0].date
-    random_commendation = random.choice(commendations)
+    random_commendation = random.choice(COMMENDATIONS)
 
     Commendation.objects.create(text=random_commendation, created=lesson_date, schoolkid=schoolkid, subject=subject, teacher=teacher)
