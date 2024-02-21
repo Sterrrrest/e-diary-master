@@ -26,7 +26,7 @@ def delete_chastisement(schoolkid):
     chast_schoolkid.delete()
 
 def create_commendation(schoolkid, subject):
-    schoolkid=Schoolkid.objects.get(full_name__contains=schoolkid)[0]
+    schoolkid = Schoolkid.objects.get(full_name__contains=schoolkid)[0]
     texts = ["Brilliant", "Super", "Genius"]
     subject = Subject.objects.filter(title=subject, year_of_study='6')[0]
     teacher = Lesson.objects.filter(subject=subject)[0].teacher
