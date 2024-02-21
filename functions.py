@@ -6,6 +6,7 @@ from datacenter.models import Chastisement
 from datacenter.models import Commendation
 from datacenter.models import Subject
 from datacenter.models import Lesson
+from django.shortcuts import get_object_or_404
 import os
 
 from environs import Env
@@ -19,11 +20,11 @@ def fix_marks(schoolkid):
 
 
 def delete_chastisement(schoolkid):
-    chastisement_schoolkid=Chastisement.objects.filter(schoolkid=schoolkid)
+    chastisement_schoolkid = Chastisement.objects.filter(schoolkid=schoolkid)
     chastisement_schoolkid.delete()
 
 def create_commendation(schoolkid, subject):
-    schoolkid = Schoolkid.objects.get(full_name__contains=schoolkid)
+    schoolkid = get_object_or_404(Schoolkid, full_name__contains=schoolkid)
     texts = ["Brilliant", "Super", "Genius"]
     subject = Subject.objects.filter(title=subject, year_of_study='6')[0]
     teacher = Lesson.objects.filter(subject=subject)[0].teacher
