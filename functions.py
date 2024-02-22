@@ -7,14 +7,9 @@ from datacenter.models import Commendation
 from datacenter.models import Subject
 from datacenter.models import Lesson
 from django.shortcuts import get_object_or_404
-import os
 
-from environs import Env
 
 COMMENDATIONS = ["Brilliant", "Super", "Genius"]
-
-env = Env()
-env.read_env()
 
 
 def fix_marks(schoolkid):
