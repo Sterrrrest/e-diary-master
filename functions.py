@@ -22,8 +22,10 @@ def delete_chastisement(schoolkid):
     chastisement_schoolkid.delete()
 
 def create_commendation(schoolkid, subject):
-    subject = Subject.objects.get(title=subject, year_of_study=schoolkid.year_of_study)
+    subject = get_object_or_404(Subject, title=subject, year_of_study=schoolkid.year_of_study)
     lesson = Lesson.objects.filter(subject=subject).order_by("-date").first()
     random_commendation = random.choice(COMMENDATIONS)
-
-    Commendation.objects.create(text=random_commendation, created=lesson.date, schoolkid=schoolkid, subject=subject, teacher=lesson.teacher)
+    if not lesson:
+        print('Такого урока нет')
+    else:
+        Commendation.objects.create(text=random_commendation, created=lesson.date, schoolkid=schoolkid, subject=subject, teacher=lesson.teacher)
